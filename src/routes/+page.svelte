@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
       import Trash from 'iconsax-svelte/Trash.svelte';
         import Edit from 'iconsax-svelte/Edit.svelte';
+        import Book1 from 'iconsax-svelte/Book1.svelte';
 
     let contacts = [];
     let newName = "";
@@ -81,8 +82,8 @@
 
 <div class="min-h-screen bg-gray-100 flex items-center justify-center p-6">
   <div class="w-full max-w-md bg-white shadow-lg rounded-2xl p-6">
-    <h1 class="text-2xl font-bold text-gray-700 mb-4 text-center">
-      📇 Contact App
+    <h1 class="text-2xl font-bold text-gray-700 mb-4 flex items-center justify-center gap-2 text-center">
+      <span><Book1 size="24" color="#2589f4" variant="Bold"/> </span>Contact App
     </h1>
 
     <!-- Input Section -->
