@@ -8,6 +8,7 @@
     let newName = "";
     let newPhone = "";
     let loading = false;
+    let btnLoading = false;
 
     async function loadContact() {
         loading = true;
@@ -28,7 +29,7 @@
     }
 
     async function addContact() {
-        loading = true;
+        btnLoading = true;
         try {
             await fetch("/api/contacts", {
                 method: "POST",
@@ -41,7 +42,7 @@
         } catch (e) {
             console.error(e);
         } finally {
-            loading = false;
+            btnLoading = false;
         }
     }
 
@@ -103,9 +104,9 @@
       <button
         class="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition"
         on:click={addContact}
-        disabled={loading || !newName || !newPhone}
+        disabled={btnLoading || !newName || !newPhone}
       >
-        {#if loading}
+        {#if btnLoading}
           Adding...
         {:else}
           Add Contact
