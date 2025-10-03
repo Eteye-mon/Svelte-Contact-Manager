@@ -66,17 +66,21 @@
         }
     }
 
-    async function deleteContact(id) {
-        loading = true;
-        try {
-            await fetch(`/api/contacts/${id}`, { method: "DELETE" });
-            await loadContact();
-        } catch (e) {
-            console.error(e);
-        } finally {
-            loading = false;
-        }
+   async function deleteContact(id) {
+    const confirmDelete = confirm("Are you sure you want to delete this contact?");
+    if (!confirmDelete) return; 
+
+    loading = true;
+    try {
+        await fetch(`/api/contacts/${id}`, { method: "DELETE" });
+        await loadContact(); // refresh list
+    } catch (e) {
+        console.error(e);
+    } finally {
+        loading = false;
     }
+}
+
 
     onMount(loadContact);
 </script>
