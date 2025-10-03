@@ -1,5 +1,6 @@
 import { json } from "@sveltejs/kit";
-import { connectDB } from "$lib/db";
+import { connectDB } from "$lib/server/db";
+import { ObjectId } from "mongodb";
 
 export async function PUT({ params, request }) {
   const db = await connectDB();
@@ -12,7 +13,7 @@ export async function PUT({ params, request }) {
   }
   const result = await db
     .collection("contacts")
-    .updateOne({ _id: db.client.constructor.ObjectId(params.id) }, { $set: updateFields });
+    .updateOne({ _id: new ObjectId(params.id) }, { $set: updateFields });
   if (result.matchedCount === 0) {
     return json({ message: "Contact not found or not updated." }, { status: 404 });
   }
@@ -21,6 +22,6 @@ export async function PUT({ params, request }) {
 
 export async function DELETE({ params }) {
   const db = await connectDB();
-  await db.collection("contacts").deleteOne({ _id: db.client.constructor.ObjectId(params.id) });
+  await db.collection("contacts").deleteOne({ _id: new ObjectId(params.id) });
   return json({ message: "Contact deleted!" });
 }

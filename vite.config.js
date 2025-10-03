@@ -6,5 +6,10 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
 	plugins: [sveltekit()
 , tailwindcss()
-	]
+	],
+	build: {
+    rollupOptions: {
+      external: ['mongodb']
+    }
+  }
 });
